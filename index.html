@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Eric Nach</title>
+    <link id="estilos" rel="stylesheet" href="carga.css">
+    <link rel="icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<header id="bienvenida">
+        <div class="logo">
+        <a href="index.html">
+            <img src="assets/logo.png" alt="Logo">
+        </a>
+        </div>
+        <nav>
+            <a href="index.html"><strong>Inicio</strong></a>
+            <a href="proyectos/index.html">Proyectos</a>
+            <a href="contacto/index.html">Contacto</a>
+            <a href="#" onclick="alert('Actualmente, el currículum no está disponible.')">Currículum</a>
+            <button id="cambiarcolor" onclick="cambiarEstilo()"><img id="cambiar_img" src="assets/modoclaro.png" alt="Cambiar Estilo"></button>
+
+        </nav>
+</header>
+<body align = center>
+    <div id="carga"></div> <!--Esto se muestra al principio de la página para que no se vea raro cómo cargan los estilos-->
+    <nav class="navsecundario">
+        <a href="#bienvenida">Inicio</a>
+        <a href="#experiencia">Mi Experiencia</a>
+        <a href="#sobremi">Sobre Mí</a>
+    </nav>
+    <main>
+    <section loading="lazy">
+        <div class="nombre">
+        <h1 id="eric">ERIC ESTEBAN</h1>
+        <h1 id="nach">NACHTYGAL</h1>
+        </div>
+        <div class="titulos"><h1>Bienvenidos</h1></div>
+        <p id="bienvenidoss">Hola, mi nombre es Eric Nachtygal, y este sitio es mi portafolio. Esta página es un resumen breve sobre mis capacidades, y un poco de información de mí. Puede contactarme a través de la página de <a href="contacto/index.html">Contacto</a>, y observar mis proyectos anteriores en la página <a href="proyectos/index.html">Proyectos.</a></p>
+    </section>
+    <section loading="lazy" id="experiencia">
+        <div class="titulos" ><h1>Mi Experiencia en Desarrollo de Software</h1></div>
+        <div class="experiencia-seccion">
+        <article>
+            <h2>Desarrollo Web</h2>
+            <div class="parrafoimagen">
+            <p>Actualmente estoy estudiando para ser un desarrollador full-stack; tengo experiencia en múltiples proyectos donde he usado HTML, CSS, PHP y JavaScript.</p>
+                <div class="logosexp">
+                <a href="https://es.wikipedia.org/wiki/HTML5" target="_blank"><img src="assets/logo-html.png" alt="Logo de HTML5"></a>
+                </div>
+            </div>
+            <ul>
+                <li>Algunos Proyectos Destacados: Khaos Doom - Pet ID</li>
+            </ul>
+        </article>
+        <article>
+            <h2>Desarrollo de Aplicaciones de Consola</h2>
+            <div class="parrafoimagen">
+            <p>Estudié por un año entero como crear aplicaciones que corren en la consola de Windows utilizando C#; en mis proyectos destacados tengo miles de líneas de código.</p>
+                <div class="logosexp">
+                <a href="https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_de_consola" target="_blank"><img src="assets/Logo_C_sharp.png" alt="Logo de C#" ></a>
+                </div>
+            </div>
+            <ul>
+                <li>Algunos Proyectos Destacados: DevQuiz - Explorador de Sombras</li>
+            </ul>
+        </article>
+        <article>
+            <h2>Desarrollo de Videojuegos</h2>
+            <div class="parrafoimagen">
+            <p>He desarrollado múltiples juegos en distintos entornos de desarrollo, tales como los motores Godot, Construct, e incluso sin un motor de videojuegos utilizando JavaScript.</p>
+                <div class="logosexp">
+                <a href="https://es.wikipedia.org/wiki/Desarrollo_de_videojuegos" target="_blank"><img src="assets/logo-joystick.png" alt="Logo de videojuegos"></a>
+                </div>
+            </div>
+            <ul>
+                <li>Algunos Proyectos Destacados: Khaos Doom - Shoot N' Dodge</li>
+            </ul>
+        </article>
+        </div>
+    </section>
+    <section loading ="lazy" id="sobremi">
+        <div class="titulos"><h1>Sobre Mí</h1></div>
+        <div class="sobremi" id="quiensoy"> <!--A cada div le ponemos la clase sobremi para que tenga el estilo del contenedor y de que se muestre el texto, y el id indica su posición-->
+        <h1>QUIÉN SOY</h1>
+        <img src="assets/mi cara.jpeg" alt="mi cara">
+        
+        <p>
+            Mi nombre completo es Eric Esteban Nachtygal, actualmente tengo 17 años y estoy estudiando programación en el <a href="https://www.latecnicalf.com.ar/" target="_blank">Instituto Técnico La Falda</a>.
+        </p>
+        <p>
+            Soy una persona cristiana, y considero que mi religión me impulsa a trabajar mejor en equipo y esforzarme a la hora de trabajar.
+        </p>
+        </div>
+        <div class="sobremi" id="hobbies">
+        <h1>MIS HOBBIES</h1>
+        <img src="assets/guitarra.jpg" alt="guitarra">
+        
+        <p>
+            Entre mis hobbies, están la música, el dibujo, la programación, los videojuegos y la escritura.
+        </p>
+        <p>
+            Entre todos, mi hobbie favorito es la música (por eso mismo yo cree la música usada en algunos de mis proyectos).
+        </p>
+        </div>
+        <div class="sobremi" id="estudios">
+        <h1>MIS ESTUDIOS</h1>
+        <img src="assets/estudios.jpg" alt="estudios">
+        
+        <p>
+            En el <a href="https://www.latecnicalf.com.ar/" target="_blank">Instituto Técnico La Falda</a>, estoy estudiando programación para recibir un título de desarrollador full-stack (es decir, back-end, front-end y bases de datos).
+        </p>
+        <p>
+            En un par de años, me gustaría estudiar la carrera <a href="https://famaf.unc.edu.ar/academica/grado/licenciatura-en-ciencias-de-la-computaci%C3%B3n/" target="_blank">"Licenciatura en Ciencias de la Computación"</a> en la Universidad Nacional de Córdoba.
+        </p>
+        </div>
+    </section>
+
+    <footer>
+        Eric E. Nachtygal, 2026, Todos los Derechos Reservados ®.
+    </footer>
+    </main>
+
+    
+
+</body>
+</html>
+
+<script>
+    const estilos = document.getElementById("estilos");
+    const cambiar_img = document.getElementById("cambiar_img");
+    let estiloactual = localStorage.getItem('estilo') ?? 0; //0 = oscuro, 1 = claro
+    const carga = document.getElementById("carga");
+    //carga el estilo carga, y después decide cual estilo tiene que cargar
+    setTimeout(() =>
+    {
+        if (estiloactual == 1)
+        {
+            estilos.href = "modoclaro.css";
+            cambiar_img.src = "assets/modooscuro.png";
+            estiloactual = 1;
+        }
+        else
+        {
+            estilos.href = "modooscuro.css";
+            cambiar_img.src = "assets/modoclaro.png";
+            estiloactual = 0;
+        }
+    }, 1);
+    
+    
+    estilos.addEventListener("load", ()=> //espera un par de segundos a que se acomoden a los elementos antes de que se muestren
+    {
+        setTimeout(() => {
+             carga.style.opacity = "0";
+            carga.style.zIndex = "-100";   
+        }, 800);
+        
+    });
+
+    function cambiarEstilo() //esta función es para cuando se hace click en el botón de cambiar estilo
+    {
+        if (estiloactual == 0)
+        {
+            estilos.href = "modoclaro.css";
+            cambiar_img.src = "assets/modooscuro.png";
+            estiloactual = 1;
+        }
+        else
+        {
+            estilos.href = "modooscuro.css";
+            cambiar_img.src = "assets/modoclaro.png";
+            estiloactual = 0;
+        }
+        localStorage.setItem('estilo', estiloactual);
+        //console.log(localStorage.getItem('estilo'));
+    }
+</script>

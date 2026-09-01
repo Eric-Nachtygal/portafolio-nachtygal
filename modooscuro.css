@@ -1,0 +1,483 @@
+*
+{
+    font-family: "Lexend", Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+html
+{
+    scroll-behavior: smooth; /*Para que los hipervínculos del nav secundario tengan transición*/
+}
+
+
+.navsecundario
+{
+    border-bottom: 2px rgba(255, 255, 255, 0.558) solid;
+    position: sticky; /*Para que se pegue arriba de la página cuando ya no se ve el nav principal*/
+    z-index: 10; /*Para que esté arriba de las otras cosas*/
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.011); /*Color transparente para que se vea por encima*/
+    backdrop-filter: blur(10px); /*Para que esté borroso lo que esté abajo del nav*/
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+.navsecundario a
+{
+    color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+    transition: all 0.2s;
+    border-bottom: 2px transparent;
+}
+
+.navsecundario a:hover
+{
+    color: white;
+    border-bottom: white 2px solid;
+}
+
+.experiencia-seccion
+{
+    text-align: left;
+    display: block;
+    flex-wrap: wrap;
+}
+
+
+.parrafoimagen
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    position: relative;
+}
+
+.experiencia-seccion h2
+{
+    padding-left: 0%;
+}
+
+.experiencia-seccion p
+{
+    flex: 1;
+    max-width: 60%;
+}
+
+.experiencia-seccion ul
+{
+    width: 100%;
+    flex: 1;
+}
+
+.logosexp
+{
+    padding-left: 85%;
+    padding-bottom: 50%;
+    position: absolute;
+}
+
+.logosexp img
+{
+    max-width: 75px;
+    transition: all 0.4s;
+    border: none #afc3d45b;
+    border-radius: 10px;
+}
+
+.logosexp img:hover
+{
+    max-width: 80px;
+    border: #afc3d45b solid 1px;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color: #00000e;
+    overflow-x: hidden; /*Esto es porque sino aparece la barra de scroll horizontal y queda fiero*/
+}
+body,header,a,footer,form
+{
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+header
+{
+    background-color: #afc3d4;  
+    margin-top: 0%;
+    top: 0;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 0.5s ease;
+}
+footer, aside
+{
+    margin-top: 0%;
+    margin-bottom: 2%;
+}
+header a
+{
+    color: black;
+    text-decoration: none;
+    font-size: 120%;
+    margin-left: 1%;
+    margin-right: 1%;
+    transition: all 0.4s;
+}
+
+header a:hover
+{
+    color: rgb(130, 130, 130);
+}
+body a:hover
+{
+  color: rgb(130, 130, 130);
+}
+button:hover
+{
+    font-size: 110%;
+    background-color: rgb(80, 80, 80);
+}
+.logo img:hover
+{
+    width: 8%;
+}
+
+.logo img
+{
+    width: 7%;
+    transition: all 0.4s ease;
+}
+
+
+
+ul li
+{
+  text-align: left;
+  margin-left: 2%;
+  list-style-type:circle;
+}
+
+
+.titulos
+{
+  font-size: 150%;
+  padding-top: 10%;
+  padding-bottom: 3%;
+}
+
+h2
+{
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+section
+{
+  font-size: 120%;
+  padding-bottom: 10%;
+}
+
+a
+{
+    color: white;
+    text-decoration: none;
+    font-size: 100%;
+    transition: all 0.4s;
+    margin: 0;
+
+}
+
+.nombre
+{
+    position: relative;
+    padding-bottom: 40%;
+    transition: all 0.6s ease;
+}
+
+.nombre h1
+{
+    font-size: 700%;
+    font-family: "Fugaz One", "Lexend", Verdana, sans-serif;
+    padding-top: 10%;
+}
+
+.nombre:hover
+{
+    transform: scale(1.1);
+}
+
+.nombre:hover #eric
+{
+    transform: rotate(-2deg);
+}
+
+.nombre:hover #nach
+{
+    transform: rotate(2deg);
+}
+
+#eric
+{
+    position: absolute;
+    top: 0%;
+    right: 30%;
+    text-shadow: rgba(255, 255, 255, 0.167) 10px 10px 5px;
+    transition: transform 0.4s ease;
+}
+
+#nach
+{
+    position: absolute;
+    top: 30%;
+    right: 7%;
+    text-shadow: rgba(255, 255, 255, 0.167) -10px 10px 5px;
+    transition: transform 0.4s ease;
+}
+
+article
+{
+    transition: all 0.4s ease;
+     transform: scale(1);
+     padding-left: 3%;
+}
+
+article:hover
+{
+    padding-left: 6%;
+    transform: scale(1.02);
+}
+
+article:hover ul li
+{
+    list-style-type:disc;
+}
+
+p
+{
+    margin-left: 0%;
+    margin-right: 5%;
+}
+
+#bienvenidoss
+{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#cambiarcolor
+{
+    background: none;
+    border: none;
+    font-size: 100%;
+    position: absolute;
+    top: -240%;
+    left: 90%;
+}
+
+#cambiarcolor :hover
+{
+    font-size: 100%;
+}
+
+#cambiar_img
+{
+    min-height: 50px;
+    max-height: 50px;
+    transition: all 0.8s ease;
+}
+
+#cambiar_img:hover
+{
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+nav
+{
+    position: relative;
+}
+
+#cara
+{
+    max-width: 15%;
+    max-height: 15%;
+    border-radius: 500px;
+    border: 2px solid white;
+    box-shadow: black 0px 0px 10px;
+    transition: all 0.8s ease;
+}
+
+#cara:hover
+{
+    transform: rotate(360deg);
+}
+
+#carga
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #afc3d4;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    z-index: 999;
+    transition: all 1s ease;
+}
+
+.sobremi
+{
+    min-width: 80%;
+    max-width: 80%;
+    height: 400px;
+    position: relative;
+    align-content: center;
+    overflow: hidden;
+    box-shadow: rgba(255, 255, 255, 0.822) 0px 0px 8px;
+    border-radius: 50px;
+    margin: auto;
+    transition: all ease 0.6s;
+    color: rgb(0, 0, 0);
+    text-shadow: /* le da sombra en distintas direcciones para que parezca que tiene borde */
+    1px 0 0 rgba(255, 255, 255, 0.426),    
+    -1px 0 0 rgb(255, 255, 255, 0.426),  
+    0 1px 0 rgb(255, 255, 255, 0.426),   
+    0 -1px 0 rgb(255, 255, 255, 0.426);
+    margin-bottom: 4%;
+}
+
+.sobremi:hover
+{
+    box-shadow: rgba(255, 255, 255, 0.822) 0px 0px 20px;
+}
+
+.sobremi img
+{
+    transition: all ease 0.4s;
+    position: absolute;
+    top: -45%;
+    left: 0%;
+    width: 100%;
+    z-index: -10;
+}
+
+.sobremi:hover img
+{
+    filter: blur(5px);
+}
+
+.sobremi p
+{
+    transition: all ease 0.2s;
+    font-size: 0;
+}
+
+.sobremi a
+{
+    transition: all ease 0.2s;
+    color: rgb(0, 0, 0);
+}
+
+.sobremi h1
+{
+    z-index: 1000;
+}
+
+.sobremi:hover p
+{
+    filter: blur(0px);
+    font-size: 100%;
+}
+
+#quiensoy, #estudios
+{
+    margin-right: 18%;
+}
+
+#hobbies
+{
+    margin-left: 18%;
+}
+
+/*Para que sea responsive*/
+@media screen and (max-width: 767px)
+{
+    *
+    {
+        font-size: 90%;
+    }
+
+    #cambiar_img
+    {
+        min-height: 30px;
+        max-height: 30px;
+    }
+
+    #cambiarcolor
+    {
+        top: -200%;
+        left: 85%;
+    }
+
+    .nombre
+    {
+        padding-bottom: 30%;
+    }
+
+    .nombre h1
+    {
+        font-size: 300%;
+        font-family: "Fugaz One", "Lexend", Verdana, sans-serif;
+        padding-top: 10%;
+    }
+
+    article
+    {
+        font-size: 120%;
+        padding-left: 3%;
+        max-width: 80%;
+    }
+
+    .logosexp img
+    {
+        max-width: 55px;
+        transition: all 0.4s;
+        border: none #afc3d45b;
+        border-radius: 10px;
+    }
+
+    .logosexp img:hover
+    {
+        max-width: 65px;
+        border: #afc3d45b solid 1px;
+    }
+
+    .sobremi
+    {
+        min-width: 80%;
+        max-width: 80%;
+        height: 20vh;
+        margin-bottom: 4%;
+    }
+
+    #eric
+    {
+        right: 38%;
+    }
+
+    #nach
+    {
+        position: absolute;
+        top: 30%;
+        right: 10%;
+        text-shadow: rgba(255, 255, 255, 0.167) -10px 10px 5px;
+        transition: transform 0.4s ease;
+    }
+}

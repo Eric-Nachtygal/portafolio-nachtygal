@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Eric Nach</title>
+    <link id="estilos" rel="stylesheet" href="carga.css">
+    <link rel="icon" href="../assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<header>
+        <div class="logo">
+        <a href="../index.html">
+            <img src="../assets/logo.png" alt="Logo" width="7%">
+        </a>
+        </div>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="../proyectos/index.html">Proyectos</a>
+            <a href="index.html"><strong>Contacto</strong></a>
+            <a href="" onclick="alert('Actualmente, el currículum no está disponible.')">Currículum</a>
+            <button id="cambiarcolor" onclick="cambiarEstilo()"><img id="cambiar_img" src="../assets/modoclaro.png" alt="Cambiar Estilo"></button>
+
+        </nav>
+</header>
+<body>
+    <div id="carga"></div> <!--Esto se muestra al principio de la página para que no se vea raro cómo cargan los estilos-->
+    <h1>Contáctame:</h1>
+    <form action="" id="formulario">
+        <fieldset>
+        <fieldset id="nombre-mail">
+            <legend><strong>Información</strong></legend>
+        <div class="inputs"> 
+        <label for="nombre">
+            Nombre: 
+        </label>
+        <input type="text" id = "nombre" maxlength = "30" required placeholder="Ej: Juan Peréz">
+        </div>
+        
+        <div class="inputs">   
+        <label for="mail">
+            Mail: 
+        </label>
+        <input type="email" id = "mail" required placeholder="Ej: juanperez@gmail.com">
+        </div>
+        </fieldset>
+        <fieldset id="mensajinho">
+            <legend><strong>Mensaje</strong></legend>
+        <textarea name="mensaje" id="mensaje" rows="5" placeholder="Escriba su mensaje..." maxlength="500" cols="50" required></textarea>
+        </fieldset>
+        <br>
+            <span id="estadomensaje"></span>
+        <br>
+        </fieldset>
+        <button type="submit">Enviar</button>
+        
+    </form>
+
+
+    <a href="https://wa.me/5493548590434?text=Hola, vi su página y quisiera hacerle una consulta sobre sus servicios." id="whatsapp" target="_blank"><img src="../assets/whatsapp-oscuro.png" alt="Contáctame en Whatsapp" id="whatsapp-img"></a>
+
+
+    <footer>
+        Eric E. Nachtygal, 2026, Todos los Derechos Reservados ®.
+    </footer>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+
+
+    const estilos = document.getElementById("estilos");
+    const cambiar_img = document.getElementById("cambiar_img");
+    let estiloactual = localStorage.getItem('estilo') ?? 0; //0 = oscuro, 1 = claro
+    const carga = document.getElementById("carga");
+    const whatsapp = document.getElementById("whatsapp-img");
+    //carga el estilo carga, y después decide cual estilo tiene que cargar
+    setTimeout(() =>
+    {
+        if (estiloactual == 1)
+        {
+            estilos.href = "modoclaro.css";
+            cambiar_img.src = "../assets/modooscuro.png";
+            whatsapp.src = "../assets/whatsapp-claro.png";
+            estiloactual = 1;
+        }
+        else
+        {
+            estilos.href = "modooscuro.css";
+            cambiar_img.src = "../assets/modoclaro.png";
+            whatsapp.src = "../assets/whatsapp-oscuro.png";
+            estiloactual = 0;
+        }
+    }, 1);
+    
+    //espera un par de segundos a que se acomoden a los elementos antes de que se muestren
+    estilos.addEventListener("load", ()=>
+    {
+        setTimeout(() => {
+             carga.style.opacity = "0";
+            carga.style.zIndex = "-100";   
+        }, 800);
+        
+    });
+    
+
+
+    emailjs.init({publicKey:"B1fzbirLqK67MAz9Q"});
+
+    const nombre = document.getElementById("nombre");
+    const mail = document.getElementById("mail");
+    const mensaje = document.getElementById("mensaje");
+    const formulario = document.getElementById("formulario");
+    const estadomensaje = document.getElementById("estadomensaje");
+
+    formulario.addEventListener("submit", (e) => //cuando se envia el formulario
+    {
+        e.preventDefault();
+        estadomensaje.innerHTML = "Enviando...";
+        //chequeamos que el formulario este completo y eso
+        if (!formulario.checkValidity())
+        {
+            return;
+        }
+
+        //si no entra al if sigue con este codigo
+
+        let mensaje_quemandamos = "Nuevo Mensaje enviado desde el Portafolio.\n Nombre: " + nombre.value + "\n Mensaje: " + mensaje.value + "\n Mail: " + mail.value;
+
+
+        //intenta enviar el mensaje a mi mail
+        emailjs.send("service_jn6y3o4","template_weqm9rb",
+        {
+            name: nombre.value,
+            message: mensaje_quemandamos,
+            email: mail.value,
+        })
+         .then((res) => { //si sale con éxito
+            console.log("EMAIL ENVIADO", res);
+            estadomensaje.innerHTML = "Mensaje enviado correctamente";
+            estadomensaje.style = "background-color: #51f76f7d";
+            formulario.reset();
+        })
+        .catch((error) => { //si hay algun error
+            console.error("ERROR AL ENVIAR", error);
+            estadomensaje.innerHTML = "El mensaje no se envió correctamente";
+            estadomensaje.style = "background-color: #f7353568";
+            formulario.reset();
+        });
+
+        });
+        
+
+    function cambiarEstilo() //esta función es para cuando se hace click en el botón de cambiar estilo
+    {
+        if (estiloactual == 0)
+        {
+            estilos.href = "modoclaro.css";
+            cambiar_img.src = "../assets/modooscuro.png";
+            whatsapp.src = "../assets/whatsapp-claro.png";
+            estiloactual = 1;
+        }
+        else
+        {
+            estilos.href = "modooscuro.css";
+            cambiar_img.src = "../assets/modoclaro.png";
+            whatsapp.src = "../assets/whatsapp-oscuro.png";
+            estiloactual = 0;
+        }
+        localStorage.setItem('estilo', estiloactual);
+    }
+    
+</script>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos - Eric Nach</title>
+    <link id="estilos" rel="stylesheet" href="carga.css">
+    <link rel="icon" href="../assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<header>
+        <div class="logo">
+        <a href="../index.html">
+            <img src="../assets/logo.png" alt="Logo">
+        </a>
+        </div>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="index.html"><strong>Proyectos</strong></a>
+            <a href="../contacto/index.html">Contacto</a>
+            <a href="#" onclick="alert('Actualmente, el currículum no está disponible.')">Currículum</a>
+            <button id="cambiarcolor" onclick="cambiarEstilo()"><img id="cambiar_img" src="../assets/modoclaro.png" alt="Cambiar Estilo"></button>
+
+        </nav>
+</header>
+<body>
+  <div id="carga"></div> <!--Esto se muestra al principio de la página para que no se vea raro cómo cargan los estilos-->
+  <main>
+  <h1>Mis Proyectos Destacados</h1>
+
+
+  <div class="slider"> <!--El slider es un contenedor, y las imagenes estan del tamaño del contenedor para que no se vea las otras imagenes-->
+  
+
+
+  <div class="slides" id="slider">
+    <div id="slide-1">
+      <img src="../assets/khaosdoom.png" alt="Khaos Doom"> 
+    </div>
+    <div id="slide-2">
+      <img src="../assets/shootndodge.png" alt="Shoot N' Dodge"> 
+    </div>
+
+    <div id="slide-3">
+      <img src="../assets/exploradorsombras.png" alt="Explorador de Sombras">    
+    </div>
+
+    <div id="slide-4">
+      <img src="../assets/devquiz.png" alt="DevQuiz">    
+    </div>
+
+    <div id="slide-5">
+      <img src="../assets/petid.png" alt="Pet ID">
+    </div>
+
+    <div id="slide-6">
+      <img src="../assets/portafolio.png" alt="Esta Página">
+    </div>
+
+
+    <div id="slide-7">
+      <img src="../assets/khaosdoom.png" alt="Khaos Doom">
+    </div>
+
+  </div>
+  <br>
+
+  <!--Estas son las flechitas que llaman a una función para ir cambiando el slide y la info-->
+  <a href="#" onclick="cambiarInfo(-1)" rel="noreferrer noopener"><img id="flecha-izq" src="../assets/slider-izquierda-oscuro.png" alt="←"></a>
+  <a href="#" onclick="cambiarInfo(1)" rel="noreferrer noopener"><img id="flecha-der" src="../assets/slider-derecha-oscuro.png" alt="→"></a>
+
+  </div>
+
+  <h2 id="titulo">KHAOS DOOM</h2> <!--El título está con el titulo de la primer imagen, pero después con js se va cambiando para cada una-->
+
+
+
+  <dialog id="modal"> <!--Con el modal pasa lo mismo que con el título-->
+    <h1 id="modaltitulo">KHAOS DOOM</h1>
+    <video controls src="../assets/video_khaosdoom.webm" id="video" poster="../assets/khaosdoom.png"></video>
+    <div class="textomodal">
+    <h3>Descripción:</h3>
+      <div id="descripcion">Se trata de una página web que nos da acceso a un juego, y da la opción de iniciar sesión para guardar partidas. Nuestro objetivo es derrotar enemigos y llegar al final del nivel.</div>
+    
+    <h3>Tecnologías Usadas:</h3>
+      <div id="tecnologia">HTML - CSS - PHP - JavaScript</div>
+
+      <h3>Compañeros de Trabajo:</h3>
+        <div id="compas">Rocco Bruno - Mateo Cachazo - Jazmín Sánchez</div>
+
+      <h3>Año de creación:</h3>
+        <div id="año">2025</div>
+    </div>
+    <button id="cerrarModal">Cerrar</button>
+  </dialog>
+  </main>
+
+
+
+
+
+
+    <footer>
+        Eric E. Nachtygal, 2026, Todos los Derechos Reservados ®.
+    </footer>
+</body>
+</html>
+<script>
+    const estilos = document.getElementById("estilos");
+    const cambiar_img = document.getElementById("cambiar_img");
+    const flecha_izq = document.getElementById("flecha-izq");
+    const flecha_der = document.getElementById("flecha-der");
+    let estiloactual = localStorage.getItem('estilo') ?? 0; //0 = oscuro, 1 = claro
+    const carga = document.getElementById("carga");
+    //carga el estilo carga, y después decide cual estilo tiene que cargar
+    setTimeout(() =>
+    {
+        if (estiloactual == 1)
+        {
+            estilos.href = "modoclaro.css";
+            cambiar_img.src = "../assets/modooscuro.png";
+            flecha_izq.src = "../assets/slider-izquierda-claro.png";
+            flecha_der.src = "../assets/slider-derecha-claro.png";
+            estiloactual = 1;
+        }
+        else
+        {
+            estilos.href = "modooscuro.css";
+            cambiar_img.src = "../assets/modoclaro.png";
+            flecha_izq.src = "../assets/slider-izquierda-oscuro.png";
+            flecha_der.src = "../assets/slider-derecha-oscuro.png";
+            estiloactual = 0;
+        }
+    }, 1);
+    
+    //espera un par de segundos a que se acomoden a los elementos antes de que se muestren
+    estilos.addEventListener("load", ()=>
+    {
+        setTimeout(() => {
+             carga.style.opacity = "0";
+            carga.style.zIndex = "-100";   
+        }, 800);
+        
+    });
+  let num = 1;
+  let prev_num = 1;
+  const modal = document.getElementById("modal");
+  const abrir = document.getElementById("slider");
+  const cerrar = document.getElementById("cerrarModal");
+  const video = document.getElementById("video");
+  //para cuando se abre el modal, hace una animación cambiando la clase del modal
+  abrir.addEventListener("click", () => 
+  {
+    modal.showModal();
+  requestAnimationFrame(() => 
+  {
+    modal.classList.add('abrirmodal');
+  });
+
+  } );
+  cerrar.addEventListener("click", () => {
+    modal.classList.remove('abrirmodal');
+    video.pause();
+    setTimeout(() => 
+    {
+    modal.close();
+    }, 200);
+    
+  });
+
+
+
+  function cambiarEstilo() //esta función es para cuando se hace click en el botón de cambiar estilo
+  {
+    if (estiloactual == 0)
+    {
+      estilos.href = "modoclaro.css";
+      cambiar_img.src = "../assets/modooscuro.png";
+      flecha_izq.src = "../assets/slider-izquierda-claro.png";
+      flecha_der.src = "../assets/slider-derecha-claro.png";
+      estiloactual = 1;
+    }
+    else
+    {
+      estilos.href = "modooscuro.css";
+      cambiar_img.src = "../assets/modoclaro.png";
+      flecha_izq.src = "../assets/slider-izquierda-oscuro.png";
+      flecha_der.src = "../assets/slider-derecha-oscuro.png";
+      estiloactual = 0;
+    }
+    localStorage.setItem('estilo', estiloactual);
+  }
+  
+  function cambiarInfo(aux) //esta función cambia la info e imagen del slider
+  {
+    prev_num = num; //guardamos cuál es la diapositiva que está antes de cambiar la otra
+    num += aux;
+    if (num == 0) //para que no busque una diapositiva negativa
+    {
+      num = 6;
+    }
+    else if (num == 7) //para que no busque una diapositiva más grande que 6
+    {
+      num = 1;
+    }
+    switch (num)
+    {
+        case 1:
+        if (prev_num == 6)
+        {
+          document.getElementById('slide-7').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          setTimeout(() => 
+          {
+          document.getElementById('slide-1').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});;
+          }, 500);
+        
+        }
+        else
+        {
+          document.getElementById('slide-1').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        }   
+        document.getElementById("titulo").innerHTML = "KHAOS DOOM";
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Se trata de una página web que nos da acceso a un juego, y da la opción de iniciar sesión para guardar partidas. Nuestro objetivo es derrotar enemigos y llegar al final del nivel.";
+        document.getElementById("tecnologia").innerHTML = "HTML - CSS - PHP - JavaScript";
+        document.getElementById("compas").innerHTML = "Rocco Bruno - Mateo Cachazo - Jazmín Sánchez";
+        document.getElementById("año").innerHTML = "2025";
+        video.src = "../assets/video_khaosdoom.webm";
+        video.poster = "../assets/khaosdoom.png";
+        break;
+        case 2:
+        document.getElementById('slide-2').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        document.getElementById("titulo").innerHTML = "SHOOT N' DODGE";
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Es un videojuego para Android, donde nuestro objetivo es sobrevivir la mayor cantidad de salas posibles, peleando contra enemigos y jefes, y obteniendo mejoras que ayudan al jugador.";
+        document.getElementById("tecnologia").innerHTML = "Godot Engine 4.5 - Android Studio";
+        document.getElementById("compas").innerHTML = "Trabajo Individual";
+        document.getElementById("año").innerHTML = "2026";
+        video.src = "../assets/video_shootndodge.webm";
+        video.poster = "../assets/shootndodge.png";
+        break;
+        case 3:
+        document.getElementById('slide-3').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        document.getElementById("titulo").innerHTML = "EXPLORADOR DE SOMBRAS";
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Se trata de un juego donde debemos guiar al protagonista a través de una sala a oscuras.";
+        document.getElementById("tecnologia").innerHTML = "Consola de C#";
+        document.getElementById("compas").innerHTML = "Milena Carranza - Fabrizio Fernández";
+        document.getElementById("año").innerHTML = "2024";
+        video.src = "../assets/video_exploradorsombras.webm";
+        video.poster = "../assets/exploradorsombras.png";
+        break;
+        case 4:
+        document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        document.getElementById("titulo").innerHTML = '<"DEVQUIZ">;';
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Es un juego de preguntas y respuestas relacionadas a la programación.";
+        document.getElementById("tecnologia").innerHTML = "Consola de C#";
+        document.getElementById("compas").innerHTML = "Juan Testa";
+        document.getElementById("año").innerHTML = "2024";
+        video.src = "../assets/video_devquiz.webm";
+        video.poster = "../assets/devquiz.png";
+        break;
+        case 5:
+        document.getElementById('slide-5').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        document.getElementById("titulo").innerHTML = "PET ID (Primera Versión)";
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Es un proyecto que crea un sistema de registro y búsqueda de mascotas, orientado para personas que buscan a una mascota perdida. Posteriormente, recibió una gran actualización, pero no forme parte de ese desarrollo.";
+        document.getElementById("tecnologia").innerHTML = "HTML - PHP - CSS";
+        document.getElementById("compas").innerHTML = "Augusto Abasolo - Maria Assad";
+        document.getElementById("año").innerHTML = "2025";
+        video.src = "../assets/video_petid.webm";
+        video.poster = "../assets/petid.png";
+        break;
+        case 6:
+        if (prev_num == 1)
+        {
+          document.getElementById('slide-7').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-6').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        }
+        else
+        {
+          document.getElementById('slide-6').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        } 
+
+
+        document.getElementById("titulo").innerHTML = "MI PORTAFOLIO";
+        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion").innerHTML= "Este sitio que está visitando actualmente. Describe mi experiencia, muestra proyectos anteriores y permite contactarme.";
+        document.getElementById("tecnologia").innerHTML = "HTML - JavaScript - CSS";
+        document.getElementById("compas").innerHTML = "Trabajo Individual";
+        document.getElementById("año").innerHTML = "2026";
+        video.src = "../assets/video_portafolio.webm";
+        video.poster = "../assets/portafolio.png";
+        break;
+    }
+  }
+
+</script>
