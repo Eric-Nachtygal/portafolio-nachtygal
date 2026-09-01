@@ -343,19 +343,20 @@ nav
     box-shadow: rgba(255, 255, 255, 0.822) 0px 0px 8px;
     border-radius: 50px;
     margin: auto;
-    transition: all ease 0.6s;
+    transition: all ease 0.6s, text-shadow 0s;
     color: rgb(0, 0, 0);
-    text-shadow: /* le da sombra en distintas direcciones para que parezca que tiene borde */
-    1px 0 0 rgba(255, 255, 255, 0.426),    
-    -1px 0 0 rgb(255, 255, 255, 0.426),  
-    0 1px 0 rgb(255, 255, 255, 0.426),   
-    0 -1px 0 rgb(255, 255, 255, 0.426);
+    
     margin-bottom: 4%;
 }
 
 .sobremi:hover
 {
     box-shadow: rgba(255, 255, 255, 0.822) 0px 0px 20px;
+    text-shadow: /* le da sombra en distintas direcciones para que parezca que tiene borde */
+    1px 0 0 rgba(255, 255, 255, 0.426),    
+    -1px 0 0 rgb(255, 255, 255, 0.426),  
+    0 1px 0 rgb(255, 255, 255, 0.426),   
+    0 -1px 0 rgb(255, 255, 255, 0.426);
 }
 
 .sobremi img
@@ -376,13 +377,24 @@ nav
 .sobremi p
 {
     transition: all ease 0.2s;
-    font-size: 0;
+    font-size: 100%;
+    color: #00000000;
+}
+
+.sobremi:hover a:hover
+{
+    color: rgb(130, 130, 130);
 }
 
 .sobremi a
 {
     transition: all ease 0.2s;
-    color: rgb(0, 0, 0);
+    color: #5e1d1d00;
+}
+
+.sobremi:hover a
+{
+    color: #000;
 }
 
 .sobremi h1
@@ -394,6 +406,7 @@ nav
 {
     filter: blur(0px);
     font-size: 100%;
+    color: #000;
 }
 
 #quiensoy, #estudios
@@ -455,7 +468,7 @@ nav
 
     .logosexp img:hover
     {
-        max-width: 65px;
+        max-width: 55px;
         border: #afc3d45b solid 1px;
     }
 
