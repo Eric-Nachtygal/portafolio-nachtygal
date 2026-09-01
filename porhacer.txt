@@ -1,0 +1,7 @@
+- Pasar Explorador de Sombras a js
+- Pasar DevQuiz a js
+- Optimizar y hacer version reducida de Khaos Doom
+- Mejorar imagenes del index
+- Mejorar pagina contacto
+- Hacer version web de Shoot N Dodge
+- Agregar hipervinculos de proyectos ya completados
