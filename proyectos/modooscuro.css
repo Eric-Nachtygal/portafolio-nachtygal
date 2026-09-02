@@ -43,7 +43,21 @@ dialog video
 
 }
 
-#cerrarModal
+.cambiarslider
+  {
+    font-size: 80%;
+    transform: scale(1);
+    margin-inline: 3vh;
+    margin-top: 0;
+  }
+
+  .cambiarslider:hover
+  {
+    transform: scale(1.1);
+    background-color: rgb(130, 130, 130);
+  }
+
+.cerrarModal
 {
   background-color: white;
   color: black;
@@ -59,7 +73,7 @@ dialog video
   font-size: 100%;
 }
 
-#cerrarModal:hover
+.cerrarModal:hover
 {
   font-size: 100%;
   transform: scale(1.1);
@@ -130,7 +144,7 @@ a
     transition: all 0.4s;
 }
 
-#probar
+.probar
 {
   background-color: white;
   color: black;
@@ -138,7 +152,7 @@ a
   font-size: 90%;
 }
 
-#probar:hover
+.probar:hover
 {
   color: rgb(130, 130, 130);
   font-size: 90%;
@@ -177,6 +191,15 @@ body a:hover
   transition: all 0.4s;
   padding-top: 2%;
 }
+
+.slider.invisible {
+  display: none;
+}
+
+/*.slider.invisible .slides > div
+{
+  height: 0vh;
+}*/
 
 /*Esto es la parte donde están las imagenes*/
 .slides {
@@ -302,13 +325,7 @@ button
     transition: all 0.4s ease;
 }
 
-button:hover
-{
-    font-size: 110%;
-    background-color: rgb(80, 80, 80);
-}
-
-#titulo, #modaltitulo
+#titulo, .modaltitulo
 {
   font-family: "Fugaz One", "Lexend", Verdana, sans-serif;
 }
@@ -402,7 +419,9 @@ nav
 
   }
 
-  #cerrarModal
+  
+
+  .cerrarModal
   {
     max-width: 25%;
     max-height: 1%;

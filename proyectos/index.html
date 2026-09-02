@@ -30,8 +30,10 @@
   <main>
   <h1>Mis Proyectos Destacados</h1>
 
+  <button class="cambiarslider" onclick="cambiarslider(1)">Ver Proyectos Completados</button>
+  <button class="cambiarslider" onclick="cambiarslider(2)">Ver Proyectos En Proceso</button>
 
-  <div class="slider"> <!--El slider es un contenedor, y las imagenes estan del tamaño del contenedor para que no se vea las otras imagenes-->
+  <div class="slider" id="carrusel1"> <!--El slider es un contenedor, y las imagenes estan del tamaño del contenedor para que no se vea las otras imagenes-->
   
 
 
@@ -52,11 +54,6 @@
     </div>
 
     <div id="slide-5">
-      <img src="../assets/portafolio.png" alt="Esta Página">
-    </div>
-
-
-    <div id="slide-6">
       <img src="../assets/khaosdoom.png" alt="Khaos Doom">
     </div>
 
@@ -69,12 +66,27 @@
 
   </div>
 
-  <h2 id="titulo">KHAOS DOOM</h2> <!--El título está con el titulo de la primer imagen, pero después con js se va cambiando para cada una-->
+<div class="slider invisible" id="carrusel2">
+  <div class="slides" id="slider2">
+  <div id="slide-1b">
+      <img src="../assets/portafolio.png" alt="Esta Página">
+    </div>
+    <div id="slide-2b">
+      <img src="../assets/supermechs.png" alt="Esta Página">
+    </div>
+    <div id="slide-3b">
+      <img src="../assets/portafolio.png" alt="Esta Página">
+    </div>
+    </div>
+    <br>
 
-
+  <!--Estas son las flechitas que llaman a una función para ir cambiando el slide y la info-->
+  <a href="#" onclick="cambiarInfo2(-1)" rel="noreferrer noopener"><img id="flecha-izq2" src="../assets/slider-izquierda-oscuro.png" alt="←"></a>
+  <a href="#" onclick="cambiarInfo2(1)" rel="noreferrer noopener"><img id="flecha-der2" src="../assets/slider-derecha-oscuro.png" alt="→"></a>
+</div>
 
   <dialog id="modal"> <!--Con el modal pasa lo mismo que con el título-->
-    <h1 id="modaltitulo">KHAOS DOOM</h1>
+    <h1 id="modaltitulo" class="modaltitulo">KHAOS DOOM</h1>
     <video controls src="../assets/video_khaosdoom.webm" id="video" poster="../assets/khaosdoom.png"></video>
     <div class="textomodal">
     <h3>Descripción:</h3>
@@ -90,12 +102,35 @@
         <div id="año">2025</div>
 
       <h3>Probar Proyecto:</h3>
-      <button onclick="" id="probar">No Disponible</button>
+      <button onclick="" id="probar" class="probar">No Disponible</button>
     </div>
-    <button id="cerrarModal">Cerrar</button>
+    <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+  </dialog>
+
+  <dialog id="modal2" class="modaltitulo"> <!--Con el modal pasa lo mismo que con el título-->
+    <h1 id="modaltitulo2">MI PORTAFOLIO</h1>
+    <video controls src="../assets/video_portafolio.webm" id="video" poster="../assets/portafolio.png"></video>
+    <div class="textomodal">
+    <h3>Descripción:</h3>
+      <div id="descripcion2">Este sitio que está visitando actualmente. Lo guardé en esta sección porque sigo actualizandolo y mejorandolo.</div>
+    
+    <h3>Tecnologías Usadas:</h3>
+      <div id="tecnologia2">HTML - CSS - JavaScript</div>
+
+      <h3>Compañeros de Trabajo:</h3>
+        <div id="compas2">Trabajo Individual</div>
+
+      <h3>Año de creación:</h3>
+        <div id="año2">2026</div>
+
+      <h3>Probar Proyecto:</h3>
+      <button onclick="" id="probar2" class="probar">Ya está en la página</button>
+    </div>
+    <button id="cerrarModal2" class="cerrarModal">Cerrar</button>
   </dialog>
   </main>
 
+  <h2 id="titulo">KHAOS DOOM</h2> <!--El título está con el titulo de la primer imagen, pero después con js se va cambiando para cada una-->
 
 
 
@@ -110,7 +145,9 @@
     const estilos = document.getElementById("estilos");
     const cambiar_img = document.getElementById("cambiar_img");
     const flecha_izq = document.getElementById("flecha-izq");
+    const flecha_izq2 = document.getElementById("flecha-izq2");
     const flecha_der = document.getElementById("flecha-der");
+    const flecha_der2 = document.getElementById("flecha-der2");
     let estiloactual = localStorage.getItem('estilo') ?? 0; //0 = oscuro, 1 = claro
     const carga = document.getElementById("carga");
     //carga el estilo carga, y después decide cual estilo tiene que cargar
@@ -121,7 +158,9 @@
             estilos.href = "modoclaro.css";
             cambiar_img.src = "../assets/modooscuro.png";
             flecha_izq.src = "../assets/slider-izquierda-claro.png";
+            flecha_izq2.src = "../assets/slider-izquierda-claro.png";
             flecha_der.src = "../assets/slider-derecha-claro.png";
+            flecha_der2.src = "../assets/slider-derecha-claro.png";
             estiloactual = 1;
         }
         else
@@ -129,7 +168,9 @@
             estilos.href = "modooscuro.css";
             cambiar_img.src = "../assets/modoclaro.png";
             flecha_izq.src = "../assets/slider-izquierda-oscuro.png";
+            flecha_izq2.src = "../assets/slider-izquierda-oscuro.png";
             flecha_der.src = "../assets/slider-derecha-oscuro.png";
+            flecha_der2.src = "../assets/slider-derecha-oscuro.png";
             estiloactual = 0;
         }
     }, 1);
@@ -144,11 +185,18 @@
         
     });
   let num = 1;
+  let num2 = 1;
   let prev_num = 1;
+  let prev_num2 = 1;
   const modal = document.getElementById("modal");
+  const modal2 = document.getElementById("modal2");
   const abrir = document.getElementById("slider");
+  const abrir2 = document.getElementById("slider2");
   const cerrar = document.getElementById("cerrarModal");
+  const cerrar2 = document.getElementById("cerrarModal2");
   const video = document.getElementById("video");
+  const carrusel1 = document.getElementById("carrusel1");
+  const carrusel2 = document.getElementById("carrusel2");
   //para cuando se abre el modal, hace una animación cambiando la clase del modal
   abrir.addEventListener("click", () => 
   {
@@ -157,14 +205,33 @@
   {
     modal.classList.add('abrirmodal');
   });
-
   } );
+
+  abrir2.addEventListener("click", () => 
+  {
+    modal2.showModal();
+  requestAnimationFrame(() => 
+  {
+    modal2.classList.add('abrirmodal');
+  });
+  } );
+
   cerrar.addEventListener("click", () => {
     modal.classList.remove('abrirmodal');
     video.pause();
     setTimeout(() => 
     {
     modal.close();
+    }, 200);
+    
+  });
+
+  cerrar2.addEventListener("click", () => {
+    modal2.classList.remove('abrirmodal');
+    video.pause();
+    setTimeout(() => 
+    {
+    modal2.close();
     }, 200);
     
   });
@@ -178,7 +245,9 @@
       estilos.href = "modoclaro.css";
       cambiar_img.src = "../assets/modooscuro.png";
       flecha_izq.src = "../assets/slider-izquierda-claro.png";
+      flecha_izq2.src = "../assets/slider-izquierda-claro.png";
       flecha_der.src = "../assets/slider-derecha-claro.png";
+      flecha_der2.src = "../assets/slider-derecha-claro.png";
       estiloactual = 1;
     }
     else
@@ -186,30 +255,32 @@
       estilos.href = "modooscuro.css";
       cambiar_img.src = "../assets/modoclaro.png";
       flecha_izq.src = "../assets/slider-izquierda-oscuro.png";
+      flecha_izq2.src = "../assets/slider-izquierda-oscuro.png";
       flecha_der.src = "../assets/slider-derecha-oscuro.png";
+      flecha_der2.src = "../assets/slider-derecha-oscuro.png";
       estiloactual = 0;
     }
     localStorage.setItem('estilo', estiloactual);
   }
   
-  function cambiarInfo(aux) //esta función cambia la info e imagen del slider
+  function cambiarInfo(aux) //esta función cambia la info e imagen del slider1
   {
     prev_num = num; //guardamos cuál es la diapositiva que está antes de cambiar la otra
     num += aux;
     if (num == 0) //para que no busque una diapositiva negativa
     {
-      num = 5;
+      num = 4;
     }
-    else if (num == 6) //para que no busque una diapositiva más grande que 5
+    else if (num == 5) //para que no busque una diapositiva más grande que 5
     {
       num = 1;
     }
     switch (num)
     {
         case 1:
-        if (prev_num == 5)
+        if (prev_num == 4)
         {
-          document.getElementById('slide-6').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-5').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
           setTimeout(() => 
           {
           document.getElementById('slide-1').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});;
@@ -258,6 +329,17 @@
         video.poster = "../assets/exploradorsombras.png";
         break;
         case 4:
+        if (prev_num == 1)
+        {
+          document.getElementById('slide-5').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        }
+        else
+        {
+          document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        } 
+
+
         document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
         document.getElementById("titulo").innerHTML = '<"DEVQUIZ">;';
         document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
@@ -270,30 +352,125 @@
         video.src = "../assets/video_devquiz.webm";
         video.poster = "../assets/devquiz.png";
         break;
-        case 5:
-        if (prev_num == 1)
+    }
+  }
+
+  function cambiarInfo2(aux) //esta función cambia la info e imagen del slider2
+  {
+    prev_num2 = num; //guardamos cuál es la diapositiva que está antes de cambiar la otra
+    num2 += aux;
+    if (num2 == 0) //para que no busque una diapositiva negativa
+    {
+      num2 = 2;
+    }
+    else if (num2 == 3) //para que no busque una diapositiva más grande que el limite
+    {
+      num2 = 1;
+    }
+    switch (num2)
+    {
+        case 1:
+
+      /* if (prev_num == 2)
         {
-          document.getElementById('slide-6').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
-          document.getElementById('slide-5').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+           document.getElementById('slide-3b').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          setTimeout(() => 
+          {
+          document.getElementById('slide-1b').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});;
+          }, 500);
         }
         else
-        {
-          document.getElementById('slide-5').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
-        } 
+        {*/
+          document.getElementById('slide-1b').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+       // } 
 
 
         document.getElementById("titulo").innerHTML = "MI PORTAFOLIO";
-        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
-        document.getElementById("descripcion").innerHTML= "Este sitio que está visitando actualmente. Describe mi experiencia, muestra proyectos anteriores y permite contactarme.";
-        document.getElementById("tecnologia").innerHTML = "HTML - JavaScript - CSS";
-        document.getElementById("compas").innerHTML = "Trabajo Individual";
-        document.getElementById("año").innerHTML = "2026";
-        document.getElementById("probar").innerHTML = "Ya está en la página";
-        document.getElementById("probar").onclick = "";
+        document.getElementById("modaltitulo2").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion2").innerHTML= "Este sitio que está visitando actualmente. Lo guardé en esta sección porque sigo actualizandolo y mejorandolo.";
+        document.getElementById("tecnologia2").innerHTML = "HTML - JavaScript - CSS";
+        document.getElementById("compas2").innerHTML = "Trabajo Individual";
+        document.getElementById("año2").innerHTML = "2026";
+        document.getElementById("probar2").innerHTML = "Ya está en la página";
+        document.getElementById("probar2").onclick = "";
         video.src = "../assets/video_portafolio.webm";
         video.poster = "../assets/portafolio.png";
+        break;
+
+        case 2:
+       /* if (prev_num == 1)
+        {
+          document.getElementById('slide-3b').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-2b').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+        }
+        else
+        {*/
+          document.getElementById('slide-2b').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+       // } 
+        document.getElementById("titulo").innerHTML = "SUPERMECHS: BATTLEGROUNDS";
+        document.getElementById("modaltitulo2").innerHTML = document.getElementById("titulo").innerHTML;
+        document.getElementById("descripcion2").innerHTML= 'Proyecto no oficial que busca reimaginar el videojuego "SuperMechs".';
+        document.getElementById("tecnologia2").innerHTML = "Godot Engine 4.7";
+        document.getElementById("compas2").innerHTML = "Trabajo Individual";
+        document.getElementById("año2").innerHTML = "2026";
+        document.getElementById("probar2").innerHTML = "No Disponible";
+        document.getElementById("probar2").onclick = "";
+        video.src = "";
+        video.poster = "../assets/supermechs.png";
         break;
     }
   }
 
+  function cambiarslider(aux) //esta funcion cambia que slider se ve
+  {
+    if (aux == 1)
+    {
+      if (carrusel1.classList.contains('invisible'))
+      {
+        carrusel1.classList.remove('invisible');
+        if (!carrusel2.classList.contains('invisible'))
+        {
+          carrusel2.classList.add('invisible');
+        }
+        
+        switch (num)
+        {
+          case 1:
+          document.getElementById("titulo").innerHTML = "KHAOS DOOM";
+          break;
+          case 2:
+          document.getElementById("titulo").innerHTML = "SHOOT N' DODGE";
+          break;
+          case 3:
+          document.getElementById("titulo").innerHTML = "EXPLORADOR DE SOMBRAS";
+          break;
+          case 4:
+          document.getElementById("titulo").innerHTML = '<"DEVQUIZ">;';
+          break;
+        }
+      }
+      
+    }
+    else
+    {
+      if (carrusel2.classList.contains('invisible'))
+      {
+        carrusel2.classList.remove('invisible');
+        if (!carrusel1.classList.contains('invisible'))
+        {
+          carrusel1.classList.add('invisible');
+        }
+        
+        switch (num2)
+        {
+          case 1:
+          document.getElementById("titulo").innerHTML = "MI PORTAFOLIO";
+          break;
+          case 2:
+          document.getElementById("titulo").innerHTML = "SUPERMECHS: BATTLEGROUNDS";
+          break;
+        }
+      }
+    }
+  }
 </script>

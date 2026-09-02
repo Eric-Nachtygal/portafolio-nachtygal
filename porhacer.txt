@@ -5,3 +5,7 @@
 - Mejorar pagina contacto
 - Hacer version web de Shoot N Dodge
 - Agregar hipervinculos de proyectos ya completados
+
+
+HECHO:
+- Cambiar página proyectos (separar secciones, agregar proyectos en proceso)
