@@ -245,7 +245,7 @@
     let pausa = false;
     let rutaBase = 'sprites/clases/';          //Creo una constante con una parte de las rutas de las imagees
     let clases = ['Arquero', 'Golem', 'Guerrero', 'Mago', 'Ninja', 'Vampiro'];   
-    let clasee = clases[Math.floor(Math.random() * clases.length)]; 
+    let clasee = clases[Math.floor(Math.random() * clases.length)]; // clase aleatoria en cada partida
     let accion = { quieto: ' Quieto', caminando: " Caminando", daño: " Daño", salto: " Salto", ataque: " Ataque-Melee", especial: " Ataque-Especial"};   //  "personajes" y "accion" se usan en la asignacion dinamica de las rutas de las imagenes
     const voz_accion =
     {
@@ -613,7 +613,7 @@
                 {
                     for (let i = 1; i < personajes.length; i++)
                     {
-                        if (estaEnVista(personajes[i]))
+                        if ((personajes[i].x >= camarax_aux - 300 && personajes[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (personajes[i].y >= camaray_aux - 210 && personajes[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                         {
                             let murcielago = new proyectil(personajes[i].x, personajes[i].y + 24, 48, 48, jugador.id, murcielagoss, murcielagoss, jugador.orientado, 0, 20)
                             personajes[i].velocidadx_max = 0;
@@ -733,7 +733,11 @@
 
     //clasee = "Admin";
 
-    let jugador = { /*altura_hitbox: estadisticas[clasee].altura,*/ contador_limite: 6,orientado:1,contador: 0, ximagen: 0, yimagen: 0, anchoimagen: 48, altoimagen: 48,parado: true, x: xinicio, y: yinicio, altura:78, ancho:48, imagen: imagenes[clasee], base: [], colicion: false, id: 1, velocidadx: 0,velocidady : 0, velocidadx_max: estadisticas[clasee].velocidadx_max, velocidady_max: estadisticas[clasee].velocidady_max, saltando : false, salto : 0, estado: "quieto", animacion_continua: true, contador_ataque: 0, vida: estadisticas[clasee].vida, daño_aux: 0, ataque: estadisticas[clasee].ataque, critico: 1, defensa: estadisticas[clasee].defensa, nivel: 1, xp: 0};
+    // Se cachean las estadísticas de la clase elegida: clasee no vuelve a cambiar en toda la partida,
+    // así que evitamos repetir la búsqueda "statsJugador" en cada frame dentro de dibujar().
+    let statsJugador = estadisticas[clasee];
+
+    let jugador = { /*altura_hitbox: statsJugador.altura,*/ contador_limite: 6,orientado:1,contador: 0, ximagen: 0, yimagen: 0, anchoimagen: 48, altoimagen: 48,parado: true, x: xinicio, y: yinicio, altura:78, ancho:48, imagen: imagenes[clasee], base: [], colicion: false, id: 1, velocidadx: 0,velocidady : 0, velocidadx_max: statsJugador.velocidadx_max, velocidady_max: statsJugador.velocidady_max, saltando : false, salto : 0, estado: "quieto", animacion_continua: true, contador_ataque: 0, vida: statsJugador.vida, daño_aux: 0, ataque: statsJugador.ataque, critico: 1, defensa: statsJugador.defensa, nivel: 1, xp: 0};
     let esqueletodiabolico1 = { altura_hitbox:25, vision: 200,contador_limite: 6,orientado:1,contador: 0, ximagen: 0, yimagen: 0, anchoimagen: 48, altoimagen: 48,parado: true, x: 500, y: 555, altura:78, ancho:48, imagen: imagenes.Esqueleto_Diabólico, base: [], colicion: false, id: 2, velocidadx: 0,velocidady : 0, velocidadx_max: 2, velocidady_max: 5, saltando : false, salto : 0, estado: "quieto", animacion_continua: true, contador_ataque: 0, vida: 7, daño_aux: 0, delay_ataque: 0, ataque: 5, defensa: 3, critico: 0, xp:2};
     let esqueletodiabolico2 = { altura_hitbox:25, vision: 200,contador_limite: 6,orientado:1,contador: 0, ximagen: 0, yimagen: 0, anchoimagen: 48, altoimagen: 48,parado: true, x: 1612, y: 555, altura:78, ancho:48, imagen: imagenes.Esqueleto_Diabólico, base: [], colicion: false, id: 2, velocidadx: 0,velocidady : 0, velocidadx_max: 2, velocidady_max: 5, saltando : false, salto : 0, estado: "quieto", animacion_continua: true, contador_ataque: 0, vida: 7, daño_aux: 0, delay_ataque: 0, ataque: 5, defensa: 3, critico: 0, xp:2};
     let esqueletodiabolico3 = { altura_hitbox:25, vision: 200,contador_limite: 6,orientado:1,contador: 0, ximagen: 0, yimagen: 0, anchoimagen: 48, altoimagen: 48,parado: true, x: 2800, y: 555, altura:78, ancho:48, imagen: imagenes.Esqueleto_Diabólico, base: [], colicion: false, id: 2, velocidadx: 0,velocidady : 0, velocidadx_max: 2, velocidady_max: 5, saltando : false, salto : 0, estado: "quieto", animacion_continua: true, contador_ataque: 0, vida: 7, daño_aux: 0, delay_ataque: 0, ataque: 5, defensa: 3, critico: 0, xp:2};
@@ -805,26 +809,7 @@
 
     let camaray_aux = jugador.y;
     let camarax_aux = jugador.x;
-
-    // Límites de la zona visible, actualizados una vez por frame.
-    let limiteVistaIzquierda = 0;
-    let limiteVistaDerecha = 0;
-    let limiteVistaArriba = 0;
-    let limiteVistaAbajo = 0;
-
-    function actualizarVista() {
-        limiteVistaIzquierda = camarax_aux - 300;
-        limiteVistaDerecha = limiteVistaIzquierda + jugador.ancho + 500;
-        limiteVistaArriba = camaray_aux - 210;
-        limiteVistaAbajo = limiteVistaArriba + jugador.altura + 300;
-    }
-
-    function estaEnVista(objeto) {
-        return objeto.x >= camarax_aux - 300 &&
-           objeto.x <= camarax_aux - 300 + jugador.ancho + 500 &&
-           objeto.y >= camaray_aux - 210 &&
-           objeto.y <= camaray_aux - 210 + jugador.altura + 300;
-    }
+    let frame_actual = 0; // se incrementa una vez por cada iteración de loop(), usado para invalidar el cache de revisar_porcion
 
     //console.log(clasee);
     hitbox.fillStyle = "black";
@@ -1339,8 +1324,6 @@
 
     function dibujar(contexto)
     {
-        actualizarVista();
-
         if (jefe == false)
         {
             //ctx.fillStyle = "rgb(100,100,100)";
@@ -1360,7 +1343,7 @@
             ctx.drawImage(nivel1[fondo_ximagen], 0, 0, 3000, 960, 0, 0, canvas.width, canvas.height);
             for (let i = 0; i < personajes.length; i++)
             {
-                if (estaEnVista(personajes[i]))
+                if ((personajes[i].x >= camarax_aux - 300 && personajes[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (personajes[i].y >= camaray_aux - 210 && personajes[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                 {
                     contexto.fillStyle = "#FF0000";
                     dibujar_personaje(personajes[i],contexto);
@@ -1374,7 +1357,7 @@
             }
             for (let i = 0; i < objetos.length; i++)
             {
-                if (estaEnVista(personajes[i]))
+                if ((objetos[i].x >= camarax_aux - 300 && objetos[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (objetos[i].y >= camaray_aux - 210 && objetos[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                 {
                     hitbox.fillStyle = "black";
                     dibujar_objeto(objetos[i]);
@@ -1391,7 +1374,7 @@
                
             for (let i = 0; i < proyectiles.length; i++)
             {
-                if (estaEnVista(personajes[i]))
+                if ((proyectiles[i].x >= camarax_aux - 300 && proyectiles[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (proyectiles[i].y >= camaray_aux - 210 && proyectiles[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                 {
                     contexto.fillStyle = "black";
                     dibujar_proyectil(proyectiles[i],contexto);
@@ -1448,20 +1431,20 @@
             hud_ctx.fillText(jugador.vida, 70, 30);*/
         }
        
-        if (jugador.vida <= (estadisticas[clasee].vida * 45) / 100 && jugador.vida > (estadisticas[clasee].vida * 20) / 100)
+        if (jugador.vida <= (statsJugador.vida * 45) / 100 && jugador.vida > (statsJugador.vida * 20) / 100)
         {
             if (vida_contador < 9)
             {
                 vida_contador++;
                 hud_ctx.fillStyle = "#ff9c9c";
-                hud_ctx.fillRect(19,20,((38 * jugador.vida) / estadisticas[clasee].vida),7);
+                hud_ctx.fillRect(19,20,((38 * jugador.vida) / statsJugador.vida),7);
                 hud_ctx.drawImage(barra_vida, 10, 0, 48, 48);    
             }
             else
             {
                 vida_contador++;
                 hud_ctx.fillStyle = "#ff4c4c";
-                hud_ctx.fillRect(19,20,((38 * jugador.vida) / estadisticas[clasee].vida),7);
+                hud_ctx.fillRect(19,20,((38 * jugador.vida) / statsJugador.vida),7);
                 hud_ctx.drawImage(barra_vida, 10, 0, 48, 48);
                 if (vida_contador >= 19)
                 {
@@ -1470,20 +1453,20 @@
             }
            
         }
-        else if (jugador.vida <= (estadisticas[clasee].vida * 20) / 100)
+        else if (jugador.vida <= (statsJugador.vida * 20) / 100)
         {
             if (vida_contador < 4)
             {
                 vida_contador++;
                 hud_ctx.fillStyle = "#ff9c9c";
-                hud_ctx.fillRect(19,20,((38 * jugador.vida) / estadisticas[clasee].vida),7);
+                hud_ctx.fillRect(19,20,((38 * jugador.vida) / statsJugador.vida),7);
                 hud_ctx.drawImage(barra_vida, 10, 0, 48, 48);    
             }
             else
             {
                 vida_contador++;
                 hud_ctx.fillStyle = "#ff4c4c";
-                hud_ctx.fillRect(19,20,((38 * jugador.vida) / estadisticas[clasee].vida),7);
+                hud_ctx.fillRect(19,20,((38 * jugador.vida) / statsJugador.vida),7);
                 hud_ctx.drawImage(barra_vida, 10, 0, 48, 48);
                 if (vida_contador >= 7)
                 {
@@ -1494,7 +1477,7 @@
         else
         {
             hud_ctx.fillStyle = "#ff4c4c";
-            hud_ctx.fillRect(19,20,((38 * jugador.vida) / estadisticas[clasee].vida),7);
+            hud_ctx.fillRect(19,20,((38 * jugador.vida) / statsJugador.vida),7);
             hud_ctx.drawImage(barra_vida, 10, 0, 48, 48);
         }
         hud_ctx.fillStyle = "#00d915";
@@ -1524,7 +1507,7 @@
     }
     function dibujar_proyectil(a,contexto)
     {
-        if (estaEnVista(a))
+        if ((a.x >= camarax_aux - 300 && a.x <= (camarax_aux - 300) + jugador.ancho + 500) && (a.y >= camaray_aux - 210 && a.y <= (camaray_aux - 210) + jugador.altura + 300))
         {
             contexto.save();
             if(a.orientado == -1)
@@ -2040,8 +2023,8 @@
         else if(Math.abs(objeto.ancho) > 400)
         {
             //console.log(4);
-            objeto.objeto.animacion_continua = false;
-            objeto.ximagen = 0;
+            objeto.animacion_continua = false;
+            ximagen=0;
         }
         else if(objeto.animacion_continua != false)
         {
@@ -2062,7 +2045,122 @@
         }
     }
 
+    // ---- Descarte rápido (broad-phase) sin usar el canvas ----
+    // revisar_porcion_real necesita dibujar TODO (personajes, obstáculos, agua,
+    // objetos, teletransportes) y leer píxeles con getImageData para saber si
+    // hay colisión. Pero la enorme mayoría de las veces que un personaje se
+    // mueve, no hay absolutamente nada cerca de él: está caminando en medio
+    // de una zona vacía. En esos casos la respuesta SIEMPRE va a ser "sin
+    // colisión", así que no hace falta dibujar nada para saberlo.
+    //
+    // Esta función usa los rectángulos que el juego YA conoce (obstaculos,
+    // objetos, agua, tps, otros personajes/proyectiles) y hace una simple
+    // comparación de números (sin canvas, sin getImageData) para decidir si
+    // hay algo relevante cerca de la posición que se va a consultar. Si no
+    // hay nada, nos ahorramos por completo la parte cara. Si hay algo cerca
+    // (aunque sea "por las dudas"), se usa igual la función original
+    // pixel-perfecta, así que el daño, las pociones, los checkpoints, los
+    // teletransportes y los ataques se siguen resolviendo exactamente igual
+    // que antes.
+    function seSuperponen(qL, qT, qR, qB, r, extraX, extraY)
+    {
+        extraX = extraX || 0;
+        extraY = extraY || 0;
+        let rL = r.x - extraX, rR = r.x + r.ancho + extraX;
+        let rT = r.y - extraY, rB = r.y + r.altura + extraY;
+        return !(rR < qL || rL > qR || rB < qT || rT > qB);
+    }
+
+    function hayAlgoCerca(porcion)
+    {
+        // Margen de seguridad: mejor pasarnos un poco y hacer alguna consulta
+        // pixel-perfecta de más, que arriesgarnos a saltear una que hacía falta.
+        let margen = 20;
+        let qx = porcion.x + porcion.velocidadx;
+        let qy = porcion.y + porcion.velocidady;
+        let qL = qx - margen, qR = qx + porcion.ancho + margen;
+        let qT = qy - margen, qB = qy + porcion.altura + margen;
+
+        let lista_obstaculos = jefe ? obstaculosjefe : obstaculos;
+        for (let i = 0; i < lista_obstaculos.length; i++)
+        {
+            if (seSuperponen(qL, qT, qR, qB, lista_obstaculos[i])) return true;
+        }
+
+        if (jefe == false)
+        {
+            for (let i = 0; i < obstaculos_daño.length; i++)
+            {
+                if (seSuperponen(qL, qT, qR, qB, obstaculos_daño[i])) return true;
+            }
+            for (let i = 0; i < objetos.length; i++)
+            {
+                // dibujar_objeto usa offsets de hasta -15/-18 respecto de a.x,a.y
+                if (seSuperponen(qL, qT, qR, qB, objetos[i], 20, 20)) return true;
+            }
+            for (let i = 0; i < tps.length; i++)
+            {
+                if (seSuperponen(qL, qT, qR, qB, tps[i])) return true;
+            }
+        }
+
+        for (let i = 0; i < personajes.length; i++)
+        {
+            if (personajes[i].id != porcion.id &&
+                seSuperponen(qL, qT, qR, qB, personajes[i])) return true;
+        }
+        for (let i = 0; i < proyectiles.length; i++)
+        {
+            if (proyectiles[i].id != porcion.id &&
+                seSuperponen(qL, qT, qR, qB, proyectiles[i])) return true;
+        }
+
+        return false;
+    }
+
+    // Resultado "todo libre" reutilizado cuando el descarte rápido determina
+    // que no hay nada cerca (evita crear un objeto nuevo cada vez).
+    const SIN_COLISION = Object.freeze({abajo: true, arriba: true, izquierda: true, derecha: true});
+
+    // revisar_porcion() es la función más costosa del juego: redibuja todo
+    // (personajes, obstáculos, proyectiles) en un canvas oculto y hace
+    // getImageData para detectar colisiones por color de píxel. El problema
+    // es que se llama muchas veces por frame para el MISMO personaje en la
+    // MISMA posición (por ejemplo, ~8 veces seguidas dentro de moverJugador()).
+    // Este wrapper hace dos cosas antes de recurrir a esa función pesada:
+    //   1) Cachea el resultado por frame (si ya se calculó para esta misma
+    //      posición/velocidad en este mismo frame, lo reusa).
+    //   2) Si no hay nada en la zona (hayAlgoCerca == false), devuelve
+    //      directamente "sin colisión" sin dibujar nada ni leer píxeles.
+    // La lógica de colisión pixel-perfecta en sí (revisar_porcion_real) no
+    // se modificó ni una línea, y se sigue usando tal cual siempre que haya
+    // algo relevante cerca.
     function revisar_porcion(porcion)
+    {
+        if (porcion._cacheFrame === frame_actual &&
+            porcion._cacheX === porcion.x &&
+            porcion._cacheY === porcion.y &&
+            porcion._cacheVX === porcion.velocidadx &&
+            porcion._cacheVY === porcion.velocidady &&
+            porcion._cacheJefe === jefe)
+        {
+            return porcion._cacheResult;
+        }
+
+        let resultado = hayAlgoCerca(porcion) ? revisar_porcion_real(porcion) : SIN_COLISION;
+
+        porcion._cacheFrame = frame_actual;
+        porcion._cacheX = porcion.x;
+        porcion._cacheY = porcion.y;
+        porcion._cacheVX = porcion.velocidadx;
+        porcion._cacheVY = porcion.velocidady;
+        porcion._cacheJefe = jefe;
+        porcion._cacheResult = resultado;
+
+        return resultado;
+    }
+
+    function revisar_porcion_real(porcion)
     {
         porcion.x += porcion.velocidadx;
         porcion.y += porcion.velocidady;
@@ -2241,13 +2339,13 @@
                         {
                             if (jugador.daño_aux >= 0)
                             {
-                                if (jugador.vida + 7 <= estadisticas[clasee].vida)
+                                if (jugador.vida + 7 <= statsJugador.vida)
                                 {
                                     jugador.daño_aux = -7;
                                 }
                                 else
                                 {
-                                    jugador.daño_aux = (estadisticas[clasee].vida - jugador.vida) * -1;
+                                    jugador.daño_aux = (statsJugador.vida - jugador.vida) * -1;
                                 }
 
                                 snd_pocion.play();
@@ -2348,13 +2446,13 @@
                         {
                             if (jugador.daño_aux >= 0)
                             {                                  
-                                if (jugador.vida + 7 <= estadisticas[clasee].vida)
+                                if (jugador.vida + 7 <= statsJugador.vida)
                                 {
                                     jugador.daño_aux = -7;
                                 }
                                 else
                                 {
-                                    jugador.daño_aux = (estadisticas[clasee].vida - jugador.vida) * -1;
+                                    jugador.daño_aux = (statsJugador.vida - jugador.vida) * -1;
                                 }
 
                                 snd_pocion.play();
@@ -2582,6 +2680,7 @@
 
     function loop()
     {
+        frame_actual++; // nuevo frame => el cache de revisar_porcion se invalida
         if (jefe == true)
         {
             window.location.href = "";
@@ -2674,7 +2773,7 @@
             {
                 for (let i = 1; i < personajes.length; i++)
                 {
-                    if (estaEnVista(personajes[i]))
+                    if ((personajes[i].x >= camarax_aux - 300 && personajes[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (personajes[i].y >= camaray_aux - 210 && personajes[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                     {
                         personajes[i].mover();
                     }
@@ -2682,7 +2781,7 @@
                 }
                 for (let i = 0; i < objetos.length; i++)
                 {
-                    if (estaEnVista(personajes[i]))
+                    if ((objetos[i].x >= camarax_aux - 300 && objetos[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (objetos[i].y >= camaray_aux - 210 && objetos[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                     {
                         cambiar(objetos[i], -1);
                     }
@@ -2690,7 +2789,7 @@
                 }
                 for (let i = 0; i < proyectiles.length; i++)
                 {
-                    if (estaEnVista(personajes[i]))
+                    if ((proyectiles[i].x >= camarax_aux - 300 && proyectiles[i].x <= (camarax_aux - 300) + jugador.ancho + 500) && (proyectiles[i].y >= camaray_aux - 210 && proyectiles[i].y <= (camaray_aux - 210) + jugador.altura + 300))
                     {
                         mover_proyectil(proyectiles[i]);
                     }
