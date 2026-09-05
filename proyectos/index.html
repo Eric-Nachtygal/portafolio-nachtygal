@@ -46,14 +46,10 @@
     </div>
 
     <div id="slide-3">
-      <img src="../assets/exploradorsombras.png" alt="Explorador de Sombras">    
+      <img src="../assets/consola.png" alt="Proyectos en C#">    
     </div>
 
     <div id="slide-4">
-      <img src="../assets/devquiz.png" alt="DevQuiz">    
-    </div>
-
-    <div id="slide-5">
       <img src="../assets/khaosdoom.png" alt="Khaos Doom">
     </div>
 
@@ -269,18 +265,18 @@
     num += aux;
     if (num == 0) //para que no busque una diapositiva negativa
     {
-      num = 4;
+      num = 3;
     }
-    else if (num == 5) //para que no busque una diapositiva más grande que 5
+    else if (num == 4) //para que no busque una diapositiva más grande que el limite
     {
       num = 1;
     }
     switch (num)
     {
         case 1:
-        if (prev_num == 4)
+        if (prev_num == 3)
         {
-          document.getElementById('slide-5').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
           setTimeout(() => 
           {
           document.getElementById('slide-1').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});;
@@ -316,41 +312,31 @@
         video.poster = "../assets/shootndodge.png";
         break;
         case 3:
-        document.getElementById('slide-3').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
-        document.getElementById("titulo").innerHTML = "EXPLORADOR DE SOMBRAS";
-        document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
-        document.getElementById("descripcion").innerHTML= "Se trata de un juego donde debemos guiar al protagonista a través de una sala a oscuras.";
-        document.getElementById("tecnologia").innerHTML = "Consola de C#";
-        document.getElementById("compas").innerHTML = "Milena Carranza - Fabrizio Fernández";
-        document.getElementById("año").innerHTML = "2024";
-        document.getElementById("probar").innerHTML = "No Disponible";
-        document.getElementById("probar").onclick = "";
-        video.src = "../assets/video_exploradorsombras.webm";
-        video.poster = "../assets/exploradorsombras.png";
-        break;
-        case 4:
         if (prev_num == 1)
         {
-          document.getElementById('slide-5').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
-          document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-4').scrollIntoView({behavior: 'auto',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-3').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
         }
         else
         {
-          document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
+          document.getElementById('slide-3').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
         } 
-
-
-        document.getElementById('slide-4').scrollIntoView({behavior: 'smooth',inline: 'start',block: 'nearest'});
-        document.getElementById("titulo").innerHTML = '<"DEVQUIZ">;';
+        document.getElementById("titulo").innerHTML = "PROYECTOS EN C#";
         document.getElementById("modaltitulo").innerHTML = document.getElementById("titulo").innerHTML;
-        document.getElementById("descripcion").innerHTML= "Es un juego de preguntas y respuestas relacionadas a la programación.";
+        document.getElementById("descripcion").innerHTML= "Hice varios proyectos con la consola de C#, pero decidí agrupar los dos mejores ya que por su cuenta no se destacan.";
         document.getElementById("tecnologia").innerHTML = "Consola de C#";
-        document.getElementById("compas").innerHTML = "Juan Testa";
+        document.getElementById("compas").innerHTML = "Milena Carranza - Fabrizio Fernández - Juan Testa";
         document.getElementById("año").innerHTML = "2024";
-        document.getElementById("probar").innerHTML = "No Disponible";
-        document.getElementById("probar").onclick = "";
-        video.src = "../assets/video_devquiz.webm";
-        video.poster = "../assets/devquiz.png";
+        document.getElementById("probar").innerHTML = "Descargar (solo Windows)";
+        document.getElementById("probar").onclick = function()
+        {
+          const archivo = document.createElement("a");
+          archivo.href = "paginas-proyectos/ProyectosConsola.zip";
+          archivo.download = "ProyectosConsola.zip";
+          archivo.click();
+        };
+        video.src = "../assets/video_consola.webm";
+        video.poster = "../assets/consola.png";
         break;
     }
   }
