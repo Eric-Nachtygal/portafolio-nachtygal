@@ -1,11 +1,11 @@
-- Pasar Explorador de Sombras a js
-- Pasar DevQuiz a js
-- Optimizar y hacer version reducida de Khaos Doom
+- Agregar menu de inicio a khaos doom (que incluya controles en algun lado)
 - Mejorar imagenes del index
 - Mejorar pagina contacto
 - Hacer version web de Shoot N Dodge
 - Agregar hipervinculos de proyectos ya completados
-- Hacerla que se vea bien en celu me olvide el nombre
+- Hacerla responsive (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
 
 HECHO:
 - Cambiar página proyectos (separar secciones, agregar proyectos en proceso)
+- Agregar descarga segura a proyectos de c#
+- Optimizar y hacer version reducida de Khaos Doom
