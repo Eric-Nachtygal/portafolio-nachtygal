@@ -490,9 +490,19 @@
                         ctxTemp.drawImage(img, 0, 0);
 
                         const imgInvertida = new Image();
-                        imgInvertida.src = canvasTemp.toDataURL();
-
+                        imgInvertida.onload = () => 
+                        {
                         imagenes[p][a] = imgInvertida;
+                        res();
+                        };
+
+                        imgInvertida.onerror = () =>
+                         {
+                        console.error(`Error cargando imagen invertida: ${src}`);
+                        res();
+                        };
+
+                        imgInvertida.src = canvasTemp.toDataURL();
                     } else {
                         // Primer enemigo: se guarda normal
                         imagenes[p][a] = img;
@@ -537,9 +547,19 @@
                         ctxTemp.drawImage(img, 0, 0);
 
                         const imgInvertida = new Image();
-                        imgInvertida.src = canvasTemp.toDataURL();
-
+                        imgInvertida.onload = () => 
+                        {
                         imagenes[p][a] = imgInvertida;
+                        res();
+                        };
+
+                        imgInvertida.onerror = () =>
+                         {
+                        console.error(`Error cargando imagen invertida: ${src}`);
+                        res();
+                        };
+
+                        imgInvertida.src = canvasTemp.toDataURL();
                     } else {
                         // Primer enemigo: se guarda normal
                         imagenes[p][a] = img;
@@ -741,7 +761,7 @@
 
     let piso = {x:0, y:637,altura:20, ancho:655};
     let piso2 = {x: 939, y: 637, altura: 20, ancho: canvas.width};
-    let pisoagua = {x:671, y:640,altura:20, ancho:256};
+    let pisoagua = {x:671, y:651,altura:20, ancho:256};
     let antisuicidio1 = {x:655, y:632 ,altura:5, ancho:16};
     let antisuicidio2 = {x:927, y:632,altura:5, ancho:12};
     let piso3 = {x: 2426, y: 901, altura: 20, ancho: 772};
@@ -1776,11 +1796,11 @@
                         switch (a.ximagen)
                         {
                             case 0:
-                                a.altura = 22;
+                                a.altura = 0;
                                 a.contador_limite = 2;
                             break;
                             case 1:
-                                a.altura = 35;
+                                a.altura = 0;
                                 a.contador_limite = 2;
                             break;
                             case 2:
@@ -1796,15 +1816,15 @@
                                 a.contador_limite = 4;
                             break;
                             case 5:
-                                a.altura = 35;
+                                a.altura = 0;
                                 a.contador_limite = 4;
                             break;
                             case 6:
-                                a.altura = 22;
+                                a.altura = 0;
                                 a.contador_limite = 2;
                             break;
                             case 7:
-                                a.altura = 9;
+                                a.altura = 0;
                                 a.contador_limite = 2;
                             break;
                             case 8:
@@ -1840,7 +1860,7 @@
                                 a.contador_limite = 4;
                             break;
                             case 1:
-                                a.altura = 39;
+                                a.altura = 0;
                                 a.contador_limite = 4;
                             break;
                             case 2:
@@ -1876,7 +1896,7 @@
                                 a.contador_limite = 4;
                             break;
                             case 10:
-                                a.altura = 4;
+                                a.altura = 0;
                                 a.contador_limite = 7;
                             break;
                             case 11:
@@ -2149,7 +2169,7 @@
         porcion.x += porcion.velocidadx;
         porcion.y += porcion.velocidady;
 
-        let altura_hb = (porcion.id == 1 && clasee == "Golem") ? 38 : 25;
+        let altura_hb = (porcion.id == 1 && clasee == "Golem") ? 35 : 23;
         let centerX = porcion.x + porcion.ancho / 2;
         let hbL = centerX - 7, hbR = centerX + 3;
         let hbB = porcion.y + porcion.altura, hbT = hbB - altura_hb;
@@ -2166,7 +2186,7 @@
         // ---- ABAJO: borde inferior de la hitbox contra obstáculos sólidos ----
         for (let i = 0; i < listaObstaculos.length; i++)
         {
-            if (seSuperponenRect(hbL, hbB - 1, hbR, hbB, listaObstaculos[i])) { colisiones.abajo = false; break; }
+            if (seSuperponenRect(hbL + 2, hbB - 1, hbR - 2, hbB, listaObstaculos[i])) { colisiones.abajo = false; break; }
         }
         // ---- ABAJO: "suelo blando" (nenúfares/tablas) -- mismo disparador de hundimiento que el original ----
         if (colisiones.abajo && jefe == false)
@@ -2454,7 +2474,7 @@
                 }
                 else
                 {
-                    camaray_aux += 2;
+                    camaray_aux += 5;
                 }
                
             }
