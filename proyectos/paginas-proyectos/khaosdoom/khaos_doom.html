@@ -16,6 +16,11 @@
         height: 100%;
     }
 
+    *
+    {
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
     body::-webkit-scrollbar 
     {
         width: 0px;
@@ -68,10 +73,6 @@
         z-index: 9999;
         background: none;
         display: none;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-        gap: 3rem;
     }
 
     dialog
@@ -79,8 +80,15 @@
         min-height: 100%;
         min-width: 100%;
         background: #000000;
+        color: white;
         border: none;
-    }
+        z-index: 1000;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        gap: 3rem;
+        text-align: center;
+    } 
     #menuinicio
     {
         background-color: black;
@@ -135,9 +143,10 @@
     .btnmodal
     {
         position: fixed;
-        top: 84vh;
+        top: 89vh;
         left: 50%;
         transform: translateX(-50%);
+        z-index: 1000;
     }
 
 
@@ -152,14 +161,24 @@
     <button id="btntuto">Tutorial</button>
     </section>
     <dialog id="tutorial">
-    
-
+        <h2>Controles</h2>
+            <p class="key">A / D → Mover Izquierda / Derecha</p>
+            <p class="key">W → Saltar</p>
+            <p class="key">P → Ataque</p>
+            <p class="key">Q → Ataque Especial</p>
+            <p><img style="height: 100px;" src="sprites/Barra de Vida.png" alt="Barra de Vida">
+            Indica tu salud actual (HP).</p>
+            <p><img style="height: 100px;" src="sprites/Barra de Experiencia.png" alt="Barra de Experiencia">
+            Muestra la experiencia acumulada (XP).</p>
+            <p> <img style="width: 100px; height: auto; margin-bottom: 20px;" src="sprites/PócimaCuración (animación).png" alt="Poción de curación">
+            Restaura parte de tu vida al usarla.</p>
     <button class="btnmodal" onclick="tutorial.close()">Volver al Inicio</button>
     </dialog>
     <dialog id="fin">
-    
-
-    <button class="btnmodal" onclick="tutorial.close()">Volver al Inicio</button>
+    <h2>¡Gracias por jugar!</h2>
+    <p>Juego original programado por: Rocco Bruno - Mateo Cachazo - Nicolás Moreno - Eric Nachtygal - Jazmín Sanchez</p>
+    <p>Versión Reducida para el Portafolio, modificada por Eric Nachtygal</p>
+    <button class="btnmodal" onclick="modalfin.close()">Volver al Inicio</button>
     </dialog>
   <div class="contenedor">
     <canvas id="juego"></canvas>
@@ -305,6 +324,7 @@
     ctx.fillStyle = 'red';
     ctx.fillRect(0,0,100,100);
     let musica = new Audio('cancion-rpg.wav');
+    musica.loop = true;
     musica.volume = 0.5;
     const snd_salto = new Audio('sonidos/salto.wav');
     const snd_daño = new Audio('sonidos/daño.wav');
@@ -325,7 +345,7 @@
     //console.log(clasee);
     let jugando = false;
     //clasee = "Admin";
-    let xinicio = 30;
+    let xinicio = 30; 
     let yinicio = 550;
     let jefe = /*<?php echo $jefe ?>*/ false;
     let pausa = false;
@@ -402,6 +422,9 @@
 
     const imagenes = { Guerrero: {}, Arquero: {}, Vampiro: {}, Ninja: {}, Mago: {}, Golem: {}, Ojo_Flotante: {}, Sabueso_Infernal: {}, Esqueleto_Diabólico: {}, Nenúfar_N1: {}, Tabla_N1: {}, NenúfarFlor_N1: {}, ColeccionableAlma_N1: {}, PócimaCuración: {}, Pincho: {}, Pinchogrande: {}, PinchoAlt: {}, Faro: {}};   // creo el objeto donde guardare las imagenes
     
+    let final = false;
+    const modalfin = document.getElementById("fin");
+
 
     promesasCarga.push(new Promise(res => {
         hueso.onload = res;
@@ -1229,11 +1252,11 @@
                     }
                     }
                 }
-                else if (e.key == "m")
+                /*else if (e.key == "m")
                 {
                     jugando = false;
                     
-                }
+                }*/
                 else if (e.key == "F5")
                 {
                     window.location.href = "";
@@ -2355,7 +2378,10 @@
                 {
                     jugador.x = 200; jugador.y = 140; camaray_aux = 0;
                     jefe = true; pared2.x = 713;
-                    musica.pause(); musica.src = 'cancion-rpg-alt.wav';
+                    jugando = false;
+                    modalfin.showModal();
+                    
+                    //musica.src = 'cancion-rpg-alt.wav';
                     for (let j = 1; j < personajes.length; j++) personajes.splice(personajes.indexOf(personajes[j]), 1);
                     return;
                 }
@@ -2467,7 +2493,10 @@
         jugador.vida = statsJugador.vida;
         jugador.ataque = statsJugador.ataque;
         jugador.defensa = statsJugador.defensa;
+        //jugador.altura = statsJugador.altura;
         jugando = true;
+        objetos.push(pocion1,pocion2);
+        musica.play();
     }
 
     function mover_enemigos(enemigo)
@@ -2789,7 +2818,6 @@
             //console.log(jugador.ximagen + " " + jugador.contador_limite + " " + jugador.contador);
             // console.log(personajes[0].vida);
         }
-       
         //musica.play();
 
         if (jugando)
@@ -2803,8 +2831,11 @@
             hud_ctx.clearRect(0,0,canvas.width, canvas.height);
             hud.style = "z-index: -6";
             document.getElementById("menuinicio").style = "z-index: 6;";
+            musica.pause();
+            musica.currentTime = 0;
             let idaux = requestAnimationFrame(loop);
             cancelAnimationFrame(idaux);
+            final = true;
         }
        
     }
@@ -2812,6 +2843,8 @@
         const btnjugar = document.getElementById("btnjugar");
         const btntuto = document.getElementById("btntuto");
         const tutorial = document.getElementById("tutorial");
+        
+        //modalfin.showModal();
         btnjugar.onclick = function()
         {
             document.getElementById("menuinicio").style = "z-index: -11;";
@@ -2826,5 +2859,11 @@
             tutorial.showModal();
         };
     });
+
+    if (final)
+    {
+        final = false;
+        modalfin.showModal();
+    }
 
 </script>
