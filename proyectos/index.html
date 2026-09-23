@@ -98,7 +98,7 @@
         <div id="año">2025</div>
 
       <h3>Probar Proyecto:</h3>
-      <button onclick="" id="probar" class="probar">No Disponible</button>
+      <button onclick="window.open('paginas-proyectos/khaosdoom/khaos_doom.html', '_blank');" id="probar" class="probar">Abrir en otra pestaña</button>
     </div>
     <button id="cerrarModal" class="cerrarModal">Cerrar</button>
   </dialog>
@@ -293,8 +293,11 @@
         document.getElementById("tecnologia").innerHTML = "HTML - CSS - PHP - JavaScript";
         document.getElementById("compas").innerHTML = "Rocco Bruno - Mateo Cachazo - Jazmín Sánchez";
         document.getElementById("año").innerHTML = "2025";
-        document.getElementById("probar").innerHTML = "No Disponible";
-        document.getElementById("probar").onclick = "";
+        document.getElementById("probar").innerHTML = "Abrir en otra pestaña";
+        document.getElementById("probar").onclick = function()
+        {
+          window.open('paginas-proyectos/khaosdoom/khaos_doom.html', '_blank');
+        };
         video.src = "../assets/video_khaosdoom.webm";
         video.poster = "../assets/khaosdoom.png";
         break;
