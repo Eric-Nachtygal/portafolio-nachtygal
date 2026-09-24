@@ -1,4 +1,3 @@
-- Agregar menu de inicio a khaos doom (que incluya controles en algun lado)
 - Mejorar imagenes del index
 - Mejorar pagina contacto
 - Hacer version web de Shoot N Dodge
@@ -9,3 +8,4 @@ HECHO:
 - Cambiar página proyectos (separar secciones, agregar proyectos en proceso)
 - Agregar descarga segura a proyectos de c#
 - Optimizar y hacer version reducida de Khaos Doom
+- Agregar menu de inicio a khaos doom (que incluya controles en algun lado)

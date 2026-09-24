@@ -150,6 +150,8 @@ a
   color: black;
   margin: 0;
   font-size: 90%;
+  display: inline-block;
+  margin-right: 1vh;
 }
 
 .probar:hover

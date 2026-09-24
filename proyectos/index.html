@@ -99,6 +99,8 @@
 
       <h3>Probar Proyecto:</h3>
       <button onclick="window.open('paginas-proyectos/khaosdoom/khaos_doom.html', '_blank');" id="probar" class="probar">Abrir en otra pestaña</button>
+      <button onclick="" id="descargar" class="probar">Descarga no disponible</button>
+    </div>
     </div>
     <button id="cerrarModal" class="cerrarModal">Cerrar</button>
   </dialog>
@@ -121,6 +123,7 @@
 
       <h3>Probar Proyecto:</h3>
       <button onclick="" id="probar2" class="probar">Ya está en la página</button>
+      <button onclick="" id="descargar2" class="probar">Descarga (No disponible)</button>
     </div>
     <button id="cerrarModal2" class="cerrarModal">Cerrar</button>
   </dialog>
@@ -298,6 +301,8 @@
         {
           window.open('paginas-proyectos/khaosdoom/khaos_doom.html', '_blank');
         };
+        document.getElementById("descargar").innerHTML = "Descarga (No disponible)";
+        document.getElementById("descargar").onclick = "";
         video.src = "../assets/video_khaosdoom.webm";
         video.poster = "../assets/khaosdoom.png";
         break;
@@ -309,8 +314,10 @@
         document.getElementById("tecnologia").innerHTML = "Godot Engine 4.5 - Android Studio";
         document.getElementById("compas").innerHTML = "Trabajo Individual";
         document.getElementById("año").innerHTML = "2026";
-        document.getElementById("probar").innerHTML = "No Disponible";
+        document.getElementById("probar").innerHTML = "Probar (No disponible)";
         document.getElementById("probar").onclick = "";
+        document.getElementById("descargar").innerHTML = "Descarga (No disponible)";
+        document.getElementById("descargar").onclick = "";
         video.src = "../assets/video_shootndodge.webm";
         video.poster = "../assets/shootndodge.png";
         break;
@@ -330,8 +337,10 @@
         document.getElementById("tecnologia").innerHTML = "Consola de C#";
         document.getElementById("compas").innerHTML = "Milena Carranza - Fabrizio Fernández - Juan Testa";
         document.getElementById("año").innerHTML = "2024";
-        document.getElementById("probar").innerHTML = "Descargar (solo Windows)";
-        document.getElementById("probar").onclick = function()
+        document.getElementById("probar").innerHTML = "Probar (No disponible)";
+        document.getElementById("probar").onclick = "";
+        document.getElementById("descargar").innerHTML = "Descargar (solo Windows)";
+        document.getElementById("descargar").onclick = function()
         {
           const archivo = document.createElement("a");
           archivo.href = "https://github.com/Eric-Nachtygal/portafolio-nachtygal/releases/download/archivos/ProyectosConsola.zip";
@@ -382,6 +391,8 @@
         document.getElementById("año2").innerHTML = "2026";
         document.getElementById("probar2").innerHTML = "Ya está en la página";
         document.getElementById("probar2").onclick = "";
+        document.getElementById("descargar2").innerHTML = "Probar (No disponible)";
+        document.getElementById("descargar2").onclick = "";
         video.src = "../assets/video_portafolio.webm";
         video.poster = "../assets/portafolio.png";
         break;
@@ -402,8 +413,10 @@
         document.getElementById("tecnologia2").innerHTML = "Godot Engine 4.7";
         document.getElementById("compas2").innerHTML = "Trabajo Individual";
         document.getElementById("año2").innerHTML = "2026";
-        document.getElementById("probar2").innerHTML = "No Disponible";
+        document.getElementById("probar2").innerHTML = "Probar (No disponible)";
         document.getElementById("probar2").onclick = "";
+        document.getElementById("descargar2").innerHTML = "Descarga (No disponible)";
+        document.getElementById("descargar2").onclick = "";
         video.src = "";
         video.poster = "../assets/supermechs.png";
         break;
